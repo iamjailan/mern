@@ -5,6 +5,8 @@ import { Book } from "./models/bookModel.js"
 
 const app = express()
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
     console.log(req);
     return res.status(234).send("Welcome to FullStack App!")
@@ -27,7 +29,6 @@ app.post('/books', async (req, res) => {
         const book = await Book.create(newBook);
         return res.status(201).send(book)
     } catch (error) {
-        console.log(error.message);
         res.status(500).send({message: err.message})
     }
 })
