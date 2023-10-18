@@ -5,15 +5,21 @@ import { PORT, mongoDbURL } from "./config.js";
 import cors from "cors";
 import booksRoute from "./routes/booksRoute.js";
 
-app.use(express.json());
-app.use("/books", booksRoute);
 app.use(cors());
+app.use(express.json());
+// app.use(
+//   cors({
+//     origin: "https://localhost:5000",
+//     method: ["GET", "POST", "DELETE", "PUT"],
+//     allowedHeaders: ["Content-Type"],
+//   })
+// );
 
 app.get("/", (req, res) => {
   return res.status(234).send("Welcome to FullStack App!");
 });
 
-// connection to db
+app.use("/books", booksRoute);
 
 mongoose
   .connect(mongoDbURL)
