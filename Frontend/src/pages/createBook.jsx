@@ -6,7 +6,7 @@ import Spinner from "../components/Spinner";
 const CreateBook = () => {
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
-  const [publishYear, setPublishYear] = React.useState("");
+  const [publishedYear, setPublishedYear] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
@@ -14,11 +14,11 @@ const CreateBook = () => {
     const data = {
       title,
       author,
-      publishYear,
+      publishedYear,
     };
     setLoading(true);
     axios
-      .post("https://localhost:5000/books", data)
+      .post("http://localhost:5000/books", data)
       .then(() => {
         setLoading(false);
         navigate("/");
@@ -28,7 +28,6 @@ const CreateBook = () => {
         console.log(err);
       });
   };
-  useEffect(() => {}, []);
   return (
     <div className="p-4">
       <BackButton />
@@ -57,8 +56,8 @@ const CreateBook = () => {
           <label className="text-xl text-gray-500">Publish Year</label>
           <input
             type="number"
-            value={publishYear}
-            onChange={(e) => setPublishYear(e.target.value)}
+            value={publishedYear}
+            onChange={(e) => setPublishedYear(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
